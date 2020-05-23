@@ -4,6 +4,7 @@ package entity;
  * Created by d.hvozdetskyi on 2020-05-10.
  */
 public class User {
+    public final static String USER_SEPARATOR = "#";
     private Long id;
     private String login;
     private String password;
