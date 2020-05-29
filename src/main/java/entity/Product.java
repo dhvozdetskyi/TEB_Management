@@ -1,52 +1,64 @@
 package entity;
 
-/**
- * Created by d.hvozdetskyi on 2020-05-10.
- */
 public class Product {
+
     public final static String PRODUCT_SEPARATOR = "#";
+    public final static char PRODUCT_TYPE = 'P';
+
     private Long id;
-    protected String productName;
-    protected double price;
-    protected float weight;
-    protected String color;
-    protected int productCount;
-    public Product(Long id, String name, double price, float weight, String color, int count){
+    private String productName;
+    private Float price;
+    private Float weight;
+    private String color;
+    private Integer productCount;
+
+    public Product(Long id, String productName, Float price, Float weight, String color, Integer productCount) {
         this.id = id;
-        this.productName = name;
+        this.productName = productName;
         this.price = price;
         this.weight = weight;
         this.color = color;
-        this.productCount = count;
+        this.productCount=productCount;
     }
-    public Long getID(){
-        return id;
-    }
-    public String getName(){
-        return productName;
-    }
-    public String getColor(){
-        return color;
-    }
-    public int getCount(){
-        return productCount;
-    }
-    public void setCount(int count){
-        this.productCount = count;
-    }
-    public double getPrice(){
-        return price;
-    }
-    public void setPrice(double price){
+
+    public void setPrice(Float price) {
         this.price = price;
     }
-    public float getWeight(){
+
+    public void setProductCount(Integer productCount) {
+        this.productCount = productCount;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public Float getWeight() {
         return weight;
     }
-    public String toString(){
-        return "Object Product: id = " + getID() + " productName = " + getName() +
-               " color = " + getColor() + " price = " + getPrice() + " weight = " + getWeight() + " count = " + getCount();
+
+    public String getColor() {
+        return color;
     }
 
+    public Integer getProductCount() {
+        return productCount;
+    }
 
+    protected String getBasicProductString() {
+        return id + PRODUCT_SEPARATOR + productName + PRODUCT_SEPARATOR + price + PRODUCT_SEPARATOR + weight + PRODUCT_SEPARATOR + color + PRODUCT_SEPARATOR + productCount;
+    }
+
+    @Override
+    public String toString() {
+        return PRODUCT_TYPE + PRODUCT_SEPARATOR + getBasicProductString();
+    }
 }

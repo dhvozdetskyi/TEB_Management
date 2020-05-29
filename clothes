@@ -1,0 +1,1 @@
+Object Cloth: extends Object Product: id = 1 productName = T-shirt color = Black price = 35.900001525878906 weight = 0.3 count = 10; size = XL material = Cotton

@@ -1,24 +1,28 @@
 package entity;
 
-/**
- * Created by d.hvozdetskyi on 2020-05-10.
- */
 public class Boots extends Product {
-    protected int size;
-    protected boolean isNaturalSkin;
-    public Boots(Long id, String name, double price, float weight, String color, int count, int size, boolean isNaturalSkin){
-        super(id, name, price, weight, color, count);
+
+    public final static char PRODUCT_TYPE = 'B';
+
+    private Integer size;
+    private boolean isNaturalSkin;
+
+    public Boots(Long id, String productName, Float price, Float weight, String color, Integer productCount, Integer size, boolean isNaturalSkin) {
+        super(id, productName, price, weight, color, productCount);
         this.size = size;
         this.isNaturalSkin = isNaturalSkin;
     }
-    public int getSize(){
+
+    public Integer getSize() {
         return size;
     }
-    public boolean getIsNaturalSkin(){
+
+    public boolean isNaturalSkin() {
         return isNaturalSkin;
     }
-    public String toString(){
-        return "Object Boots: extends " + super.toString() + "; size = " + getSize() + " isNaturalSkin = " + getIsNaturalSkin();
-    }
 
+    @Override
+    public String toString() {
+        return PRODUCT_TYPE + PRODUCT_SEPARATOR + getBasicProductString() + PRODUCT_SEPARATOR + size + PRODUCT_SEPARATOR + isNaturalSkin;
+    }
 }

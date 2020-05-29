@@ -11,13 +11,23 @@ import java.util.List;
 
 public class ProductDaoImpl implements ProductDao {
 
-    private final String fileName;
-    private final String productType;
+    private static final String fileName = "products.data";
+    private static ProductDao instance = null;
 
-    public ProductDaoImpl(String fileName, String productType) throws IOException {
-        this.fileName=fileName;
-        this.productType=productType;
-        FileUtils.createNewFile(fileName);
+    private ProductDaoImpl() {
+        try {
+            FileUtils.createNewFile(fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ProductDao getInstance() {
+        if (instance == null) {
+            instance = new ProductDaoImpl();
+        }
+
+        return instance;
     }
 
 
@@ -40,7 +50,7 @@ public class ProductDaoImpl implements ProductDao {
         List<Product> products = getAllProducts();
 
         for(int i=0;i<products.size(); i++) {
-            boolean isFoundProduct = products.get(i).getID().equals(productId);
+            boolean isFoundProduct = products.get(i).getId().equals(productId);
             if (isFoundProduct) {
                 products.remove(i);
             }
@@ -53,7 +63,7 @@ public class ProductDaoImpl implements ProductDao {
         List<Product> products = getAllProducts();
 
         for(int i=0;i<products.size(); i++) {
-            boolean isFoundProduct = products.get(i).getName().equals(productName);
+            boolean isFoundProduct = products.get(i).getProductName().equals(productName);
             if (isFoundProduct) {
                 products.remove(i);
             }
@@ -68,43 +78,14 @@ public class ProductDaoImpl implements ProductDao {
 
         String readLine = bufferedReader.readLine();
         while(readLine != null) {
-            Product product = ProductParser.stringToProduct(readLine, productType);
+            Product product = ProductParser.stringToProduct(readLine);
             if (product != null) {
                 products.add(product);
             }
+            readLine = bufferedReader.readLine();
         }
         bufferedReader.close();
 
         return products;
-    }
-
-    public Product getProductById(Long productId) throws IOException {
-        List<Product> products = getAllProducts();
-
-        for (Product product : products
-                ) {
-            boolean isFoundProduct = product.getID().equals(productId);
-            if (isFoundProduct) {
-                return product;
-            }
-
-        }
-
-        return null;
-    }
-
-    public Product getProductByProductName(String productName) throws IOException {
-        List<Product> products = getAllProducts();
-
-        for (Product product : products
-                ) {
-            boolean isFoundProduct = product.getName().equals(productName);
-            if (isFoundProduct) {
-                return product;
-            }
-
-        }
-
-        return null;
     }
 }

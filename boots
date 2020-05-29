@@ -1,0 +1,1 @@
+Object Boots: extends Object Product: id = 1 productName = High heels color = Red price = 99.9000015258789 weight = 0.5 count = 12; size = 35 isNaturalSkin = true
